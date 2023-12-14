@@ -2,13 +2,24 @@ import showModal from './modal';
 import createElement from '../../helpers/domHelper';
 
 export default function showWinnerModal(fighter) {
-    const { name, source: src } = fighter;
-    const title = `${name} is a winner! Congrats!`;
-    const bodyElement = createElement({
+    const { source, name } = fighter;
+    const bodyElement = createElement({ tagName: 'div', className: 'winner-box' });
+    const attributes = {
+        src: source,
+        title: name,
+        alt: name
+    };
+    const fighterImage = createElement({
         tagName: 'img',
-        className: 'modal-body',
-        attributes: { src }
+        className: 'winner-image',
+        attributes
     });
 
-    showModal({ title, bodyElement, onClose: () => document.location.reload() });
+    bodyElement.append(fighterImage);
+
+    showModal({
+        title: `${name} is the winner!`,
+        bodyElement,
+        onClose: () => document.location.reload()
+    });
 }

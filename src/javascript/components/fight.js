@@ -1,9 +1,5 @@
 import controls from '../../constants/controls';
 
-const criticalHitPressed = new Set();
-const CRITICAL_HIT_COOLDOWN = 10000;
-let playerOneLastCriticalHitTime = 0;
-let playerTwoLastCriticalHitTime = 0;
 const {
     PlayerOneAttack,
     PlayerOneBlock,
@@ -42,6 +38,10 @@ export async function fight(firstFighter, secondFighter) {
             health: secondFighter.health,
             healthBar: document.querySelector('#right-fighter-indicator')
         };
+        const criticalHitPressed = new Set();
+        const CRITICAL_HIT_COOLDOWN = 10000;
+        let playerOneLastCriticalHitTime = 0;
+        let playerTwoLastCriticalHitTime = 0;
 
         function getHealthBarWidth(currentHealth, initialHealth) {
             const currentBlockWidth = (currentHealth / initialHealth) * 100;
@@ -57,7 +57,7 @@ export async function fight(firstFighter, secondFighter) {
         function criticalHit(e) {
             if (
                 PlayerOneCriticalHitCombination.includes(e.code) &&
-                Date.now() - playerOneLastCriticalHitTime >= CRITICAL_HIT_COOLDOWN
+                Date.now() - playerOneLastCriticalHitTime > CRITICAL_HIT_COOLDOWN
             ) {
                 criticalHitPressed.add(e.code);
                 if (criticalHitPressed.size === 3) {
@@ -70,7 +70,7 @@ export async function fight(firstFighter, secondFighter) {
             }
             if (
                 PlayerTwoCriticalHitCombination.includes(e.code) &&
-                Date.now() - playerTwoLastCriticalHitTime >= CRITICAL_HIT_COOLDOWN
+                Date.now() - playerTwoLastCriticalHitTime > CRITICAL_HIT_COOLDOWN
             ) {
                 criticalHitPressed.add(e.code);
                 if (criticalHitPressed.size === 3) {
