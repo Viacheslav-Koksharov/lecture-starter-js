@@ -14,7 +14,7 @@ function createHeader(title, onClose) {
     const closeButton = createElement({ tagName: 'div', className: 'close-btn' });
 
     titleElement.innerText = title;
-    closeButton.innerText = '×';
+    closeButton.innerText = 'x';
 
     const close = () => {
         hideModal();
@@ -37,7 +37,7 @@ function createModal({ title, bodyElement, onClose }) {
     return layer;
 }
 
-export default function showModal({ title, bodyElement, onClose = () => { } }) {
+export default function showModal({ title, bodyElement, onClose = () => {} }) {
     const root = getModalContainer();
     const modal = createModal({ title, bodyElement, onClose });
 

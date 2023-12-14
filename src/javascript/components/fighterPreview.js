@@ -7,8 +7,26 @@ export function createFighterPreview(fighter, position) {
         className: `fighter-preview___root ${positionClassName}`
     });
 
-    // todo: show fighter info (image, name, health, etc.)
+    if (fighter) {
+        const { source, _id, ...skills } = fighter;
+        const attributes = { src: source };
+        const fighterImage = createElement({
+            tagName: 'img',
+            className: `fighter-preview___root ${positionClassName}`,
+            attributes
+        });
+        if (position === 'right') {
+            fighterImage.style.transform = 'scale(-1, 1)';
+        }
 
+        const fighterSkills = Object.keys(skills).map(key => {
+            const fighterSkillsList = document.createElement('div');
+            fighterSkillsList.append(key, skills[`${key}`]);
+            return fighterSkillsList;
+        });
+
+        fighterElement.append(...fighterSkills, fighterImage);
+    }
     return fighterElement;
 }
 

@@ -9,7 +9,7 @@
     },
     "plugins": ["prettier"],
     "rules": {
-        "prettier/prettier": 0,
+        "prettier/prettier": ["error", { "endOfLine": "auto", "singleQuote": true, "parser": "flow" }],
         "arrow-body-style": 0,
         "no-console": ["error", { "allow": ["warn", "error"] }],
         "no-underscore-dangle": 0,
